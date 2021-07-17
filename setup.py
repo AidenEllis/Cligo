@@ -66,7 +66,6 @@ setup(
         "Operating System :: OS Independent",
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Topic :: Framework :: Cligo',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
