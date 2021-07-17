@@ -66,6 +66,7 @@ setup(
         "Operating System :: OS Independent",
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
+        'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
