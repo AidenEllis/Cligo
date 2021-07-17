@@ -50,6 +50,7 @@ setup(
     version=project_version,
     author=AUTHOR,
     author_email="",
+    license='MIT',
     long_description_content_type="text/markdown",
     long_description=read_file('README.md'),
     description=SHORT_DESCRIPTION,
@@ -60,11 +61,14 @@ setup(
     install_requires=open(REQUIREMENTS_FILE_PATH).read().split("\n") if REQUIREMENTS_FILE_PATH else [],
     keywords=KEYWORDS,
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
+        "Development Status :: 1 - Planning",
         "Programming Language :: Python :: 3",
-        "Operating System :: Unix",
-        "Operating System :: MacOS :: MacOS X",
-        "Operating System :: Microsoft :: Windows",
+        "Operating System :: OS Independent",
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+        'Topic :: Framework',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Utilities',
     ]
 )
