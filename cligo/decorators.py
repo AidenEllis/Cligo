@@ -1,3 +1,6 @@
+from process import commands
+
+
 def parametrized(dec):
     """
     A decorator to prametrize another decorator, in this way you can
@@ -23,3 +26,14 @@ def parametrized(dec):
         return repl
 
     return layer
+
+
+@parametrized
+def register(func, command_name: str):
+    print(func)
+    commands[command_name] = func
+
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+
+    return wrapper
