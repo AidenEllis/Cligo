@@ -60,6 +60,11 @@ setup(
     package_data={VERSION_FOLDER_NAME: ['VERSION']},
     install_requires=open(REQUIREMENTS_FILE_PATH).read().split("\n") if REQUIREMENTS_FILE_PATH else [],
     keywords=KEYWORDS,
+    entry_points={
+      'console_scripts': [
+          "cligo = cligo.core.management:execute_from_command_line",
+      ],
+    },
     classifiers=[
         "Development Status :: 1 - Planning",
         "Programming Language :: Python :: 3",
