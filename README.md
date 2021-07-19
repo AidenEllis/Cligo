@@ -20,5 +20,9 @@
 
 CliGo is open to contributions.
 
-Please read [CONTRIBUTING.md](https://github.com/benawad/dogehouse/blob/staging/CONTRIBUTING.md) for details on this project 
+Please read [CONTRIBUTING.md](https://github.com/AidenEllis/Cligo/blob/main/CONTRIBUTING.md) for details on this project 
 or visit our [Discord server](https://discord.gg/gbJ3sAeZkv)
+
+## Code of Conduct
+
+Please read [CODE_OF_CONDUCT.md](https://github.com/AidenEllis/Cligo/blob/main//CODE_OF_CONDUCT.md) for details on our code of conduct.
