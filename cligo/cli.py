@@ -1,3 +1,4 @@
+import sys
 import typing
 from cligo import process
 from cligo.exceptions import *
@@ -160,13 +161,13 @@ class CliApp:
         else:
             raise CommandNotFoundError(command_name=command_name)
 
-    def run(self, prams: list):
+    def run(self):
         """
         Takes user input and runs the command and handles Errors.
         """
 
         try:
-            prams = prams[1:]  # removes the command name
+            prams = sys.argv[1:]  # removes the command name
             self.execute(prams)
 
         except RequiredArgumentNotProvidedError as e:
