@@ -1,4 +1,4 @@
-<a href="https://github.com/AidenEllis/Cligo"><p align="center">
+<a href="https://github.com/AidenEllis/Cligo"><p align="center"></a>
 <img height=100 src="https://upstorage.pythonanywhere.com/api/storage/file/its_sakib/Public/cligo/cligo.png"/>
 
 
