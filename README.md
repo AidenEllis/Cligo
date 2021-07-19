@@ -16,6 +16,23 @@
 
 ---
 
+## 🎫 Introduction :
+Cligo (aka CLI Go) is a Python-based free and open-source CLI (Command line interface)
+Framework. Cligo makes it easier & faster to build CLI
+application.
+
+The main goal of CliGo is to allow developers to focus on building commands,
+instead of taking care about the process, execution & user input handeling.
+
+And with our built-in components you can easily do stuffs like `checking 
+permissions` (e.g., checking if the user is logged in), 
+`user information`, `Handeling errors`, `Handeling inputs`, `Database` 
+and more.
+
+With our continuous updates you will be keep getting new components and
+features.
+
+
 ## Contributions
 
 CliGo is open to contributions.
