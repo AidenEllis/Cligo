@@ -24,4 +24,4 @@ features.
 
 ###
 
-[<b> Getting started > </b>](Introduction.md)
+[<b> Getting started > </b>](GettingStarted.md)
