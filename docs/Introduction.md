@@ -21,3 +21,7 @@ and more.
 
 With our continuous updates you will keep getting new components and
 features.
+
+###
+
+<a style="color: #FE7789;">Getting started <b> &nbsp; > </b></a>
