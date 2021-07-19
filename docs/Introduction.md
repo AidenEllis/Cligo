@@ -19,5 +19,5 @@ permissions` (e.g., checking if the user is logged in),
 `user information`, `Handeling errors`, `Handeling inputs`, `Database` 
 and more.
 
-With our continuous updates you will be keep getting new components and
+With our continuous updates you will keep getting new components and
 features.
