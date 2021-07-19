@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <strong>Taking CLI Framework to the moon 🚀</strong>
+  <strong>CLI Go - Taking CLI Framework to the moon 🚀</strong>
 </p>
 
 <h3 align="center">
