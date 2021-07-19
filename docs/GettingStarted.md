@@ -1,0 +1,102 @@
+## ⚡ Getting started :
+
+Now we are going to start understanding the CliGo Framework
+and create Some Commands.
+
+
+### Installing Cligo :
+```shell
+pip install cligo
+```
+
+Cligo is print() driven, it's not like you are going to return a value, because
+you will be printing / displaying values continuously.
+
+Now we will create a CLI app togather, Let's get started.
+
+* Go into your project folder and then let's create a python file named
+`commands.py` and another file named `main.py`
+  
+
+inside `main.py`
+```python
+from cligo.cli import CliApp
+
+app = CliApp("AppName")
+```
+
+now go inside `commands.py`. And let's start creating a login command.
+```python
+from cligo.command import Command
+
+
+class Login(Command):
+    
+    def process(self, request, username, password):
+        if username == "admin" and password == "pass123":
+            print("Login successful.")
+        else:
+            print("Incorrect username & password.")
+```
+Our command class must inherit from cligo.command.Command and make sure to do 
+the work inside process(), request is a required parameter, and username and password
+is our required parameter. Now we need to register our command object.
+
+go to `main.py`
+```python
+from cligo.cli import CliApp
+from commands import Login
+
+
+app = CliApp("AppName")
+
+app.register(Login, command_name='login')
+```
+We have just imported our commands & registered our command. command_name is the name of the command and it will
+be executed when we call it. Now let's run it.
+
+in your `main.py` call app.run()
+```python
+from cligo.cli import CliApp
+from commands import Login
+
+
+app = CliApp("AppName")
+
+app.register(Login, command_name='login')
+
+app.run()
+```
+
+It's ready to go, let's run it. Open your terminal and run
+```shell
+python main.py login
+```
+
+```shell
+output: You haven't fill out the required argument: <username>
+```
+
+since we haven't fill out those required parameters `username` and `password` it
+gave us this message, Now let's fill those params
+
+```shell
+python main.py login admin pass123
+```
+
+```shell
+output: Login successful.
+```
+
+Now let's try entering wrong cerdentials.
+
+```shell
+python main.py login john somepass
+```
+
+```shell
+output: Incorrect username & password.
+```
+
+It's working as we expected 🥳
+
