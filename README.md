@@ -22,7 +22,7 @@ Framework. Cligo makes it easier & faster to build CLI
 application.
 
 The main goal of CliGo is to allow developers to focus on building commands,
-instead of taking care about the process, execution & user input handeling.
+instead of worrying about the process, execution & user input handeling.
 
 And with our built-in components you can easily do stuffs like `checking 
 permissions` (e.g., checking if the user is logged in), 
