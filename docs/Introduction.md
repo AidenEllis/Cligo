@@ -24,4 +24,4 @@ features.
 
 ###
 
-<a style="color: #FE7789;">Getting started <b> &nbsp; > </b></a>
+[Getting started <b> &nbsp; > </b>](Introduction.md)
