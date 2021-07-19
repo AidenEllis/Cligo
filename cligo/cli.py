@@ -124,8 +124,9 @@ class CliApp:
                     filled_all_required_param = False
 
             if not filled_all_required_param:
-                raise RequiredArgumentNotProvidedError(command_obj=command_obj,
-                                                       required_arg=required_param_didnt_fill[0])
+                if not input_prams[0] in param_keywords.values():
+                    raise RequiredArgumentNotProvidedError(command_obj=command_obj,
+                                                           required_arg=required_param_didnt_fill[0])
 
             # the 'request' param in command object (Working on it)
             context = {}
