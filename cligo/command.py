@@ -12,22 +12,25 @@ class Command:
         """
         pass
 
-    @staticmethod
-    def quit():
-        exit()
-
     def OnRequiredArgumentNotProvidedError(self, arg, command_obj):
+        """Handles OnRequiredArgumentNotProvidedError"""
         print(f"Fill the required argument: <{arg}>")
 
     def OnGotUnexpectedvalueError(self, command_name, value):
+        """Handles OnGotUnexpectedvalueError"""
         print(f"Command <{command_name}> got unexpected value '{value}'")
 
     def OnGotMultipleValueError(self, command_name, arg_name):
+        """Handles OnGotMultipleValueError"""
         print(f"Command <{command_name}> got multiple values for argument '{arg_name}'")
 
     def __call__(self, *args, **kwargs):
         pass
 
+    @staticmethod
+    def quit():
+        exit()
+
     class Meta:
-        kwarg_keywords = None
+        param_keywords = None
         kwarg_prefix = None

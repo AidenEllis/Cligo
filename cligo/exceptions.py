@@ -1,6 +1,3 @@
-from .command import Command
-
-
 class CommandNotFoundError(Exception):
     __module__ = Exception.__module__
 
@@ -47,7 +44,7 @@ class NotACommandSubClassError(Exception):
 class RequiredArgumentNotProvidedError(Exception):
     __module__ = Exception.__module__
 
-    def __init__(self, required_arg, command_obj: Command):
+    def __init__(self, required_arg, command_obj):
         message = f"Required argument <{required_arg}> not provided, class: <{command_obj}>"
         self.message = message
         self.required_arg = required_arg
