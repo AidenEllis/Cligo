@@ -1,7 +1,7 @@
 import inspect
 
 
-def get_func_args(func, remove_vals=None) -> list[str]:
+def get_func_args(func, remove_vals=None) -> list:
     """Get function arguments, varargs, kwargs and defaults.
 
     This function will be called whenever a exception is raised."""
