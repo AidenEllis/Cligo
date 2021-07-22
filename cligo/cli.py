@@ -5,29 +5,40 @@ from cligo.exceptions import *
 from .utils.funcTools import *
 from cligo.command import Command
 from cligo.core.error import CliError
+from .db.manager import DBManager
+
+
+__all__ = ['CliApp']
 
 
 class CliApp:
+
+    configuration = {}
 
     def __init__(self, name: str):
         self.name = name
         self.commands = process.commands
         self.on_command_not_found_error = None
+        self.db = DBManager(CliApp.configuration.get('database'))
+
+    @staticmethod
+    def config(database=None):
+        """
+        sets configuration for the class, as a dict.
+        """
+        CliApp.configuration['database'] = database
 
     @staticmethod
     def register(command_obj: typing.Type[Command], command_name: str):
         """
         Adds the command process & its permissions to process.commands dict.
-
         commands dict blueprint:
-
             commands = {
                 'someCommandName': {
                     'command': <The command class object 0x0000>
                     'permissions': [<permissions class objects 0x0000>]
                 }
             }
-
         Before adding we check if the command_obj is inherited from command.Command class
         """
 
@@ -124,9 +135,8 @@ class CliApp:
                     filled_all_required_param = False
 
             if not filled_all_required_param:
-                if not input_prams[0] in param_keywords.values():
-                    raise RequiredArgumentNotProvidedError(command_obj=command_obj,
-                                                           required_arg=required_param_didnt_fill[0])
+                raise RequiredArgumentNotProvidedError(command_obj=command_obj,
+                                                       required_arg=required_param_didnt_fill[0])
 
             # the 'request' param in command object (Working on it)
             context = {}
