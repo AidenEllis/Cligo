@@ -28,8 +28,8 @@ KEYWORDS = [
     "Command Line Interface"
 ]
 
-AUTHOR = "Aiden"
-
+AUTHOR = "Aiden Ellis"
+AUTHOR_EMAIL = "itsaidenellis@protonmail.com"
 
 project_version = subprocess.run(['git', 'describe', '--tags'], stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
 assert "." in project_version
@@ -49,7 +49,7 @@ setup(
     name=PACKAGE_NAME,
     version=project_version,
     author=AUTHOR,
-    author_email="",
+    author_email=AUTHOR_EMAIL,
     license='MIT',
     long_description_content_type="text/markdown",
     long_description=read_file('README.md'),
