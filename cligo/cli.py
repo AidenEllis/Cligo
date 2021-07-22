@@ -27,6 +27,7 @@ class CliApp:
         sets configuration for the class, as a dict.
         """
         CliApp.configuration['database'] = database
+        CliApp.configuration.get('database').connect()
 
     @staticmethod
     def register(command_obj: typing.Type[Command], command_name: str):

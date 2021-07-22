@@ -8,7 +8,6 @@ class ModelRegister:
 
     def register(self, models: list = None):
         if models:
-            self.database.connect()
             self.database.create_tables(models)
 
 
