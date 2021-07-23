@@ -67,6 +67,13 @@ class CliApp:
             command_dict = self.commands[command_name]
             command_obj = command_dict['command']()  # Inititlizing class with ()
 
+            # check for help command
+            help_keywords = command_obj.Meta.help_keywords
+
+            if args and args[0] in help_keywords and args[0] != '':
+                command_obj.help()
+                exit()
+
             # parameters of the func / method
             func_params = get_func_args(func=command_obj.process, remove_vals=['*args', '**kwargs'])[2:]
             required_params = get_required_params(func=command_obj.process, remove_values=['self', 'request'])

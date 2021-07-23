@@ -24,6 +24,9 @@ class Command:
         """Handles OnGotMultipleValueError"""
         print(f"Command <{command_name}> got multiple values for argument '{arg_name}'")
 
+    def help(self):
+        pass
+
     def __call__(self, *args, **kwargs):
         pass
 
@@ -34,3 +37,4 @@ class Command:
     class Meta:
         param_keywords = None
         kwarg_prefix = None
+        help_keywords = []
