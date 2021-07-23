@@ -4,8 +4,8 @@ def commandManager(args):
     We call this in Terminal :
     C:/Some/Path> cligo <some_command>
     """
-    if args[0] == "test":
-        try:
-            print(f"Test is Working. Arg: {args[1]}")
-        except IndexError:
-            print('Missing 1 Argument.')
+    try:
+        if args[0] == "test":
+            print(f"Test is Working. Arg: {args[0]}")
+    except IndexError:
+        print('Please provide an argument.')
