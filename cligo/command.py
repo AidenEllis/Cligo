@@ -9,13 +9,6 @@ class Command:
 
     permissions = []
 
-    def process(self, request, *args, **kwargs):
-        """
-        process the incoming request, doesn't need to return anything.
-        It's all print based.
-        """
-        pass
-
     def OnRequiredArgumentNotProvidedError(self, arg, command_obj):
         """Handles OnRequiredArgumentNotProvidedError"""
         print(f"Fill the required argument: <{arg}>")
