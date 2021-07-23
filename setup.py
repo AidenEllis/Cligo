@@ -1,11 +1,9 @@
-from setuptools import setup, find_packages
 import os
-import subprocess
+import re
+from setuptools import setup, find_packages
 
 
 PACKAGE_NAME = "Cligo"
-
-VERSION_FOLDER_NAME = "cligo"
 
 SHORT_DESCRIPTION = "A Python CLI Framework."
 
@@ -14,10 +12,16 @@ LONG_DESCRIPTION_FILE_PATH = "README.md"
 URL = "https://github.com/AidenEllis/Cligo"
 
 PROJECT_URLS = {
-  'Github': 'https://github.com/AidenEllis/Cligo'
+    'Github': 'https://github.com/AidenEllis/Cligo',
+    'Documentation': 'https://github.com/AidenEllis/Cligo/blob/main/docs',
+    'Issue tracker': 'https://github.com/AidenEllis/Cligo/issues'
 }
 
+requirements = []
 REQUIREMENTS_FILE_PATH = "requirements.txt"
+
+with open('requirements.txt') as f:
+  requirements = f.read().splitlines()
 
 KEYWORDS = [
     "cligo",
@@ -31,13 +35,16 @@ KEYWORDS = [
 AUTHOR = "Aiden Ellis"
 AUTHOR_EMAIL = "itsaidenellis@protonmail.com"
 
-project_version = subprocess.run(['git', 'describe', '--tags'], stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
-assert "." in project_version
+version = ''
 
-assert os.path.isfile(f"{VERSION_FOLDER_NAME}/version.py")
+try:
+    with open('../cligo/__init__.py') as f:
+        version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
+except AttributeError:
+    raise RuntimeError("__version__ not found.")
 
-with open(f"{VERSION_FOLDER_NAME}/VERSION", "w", encoding="utf-8") as fh:
-    fh.write(f"{project_version}\n")
+if not version:
+    raise RuntimeError('Verison not provided.')
 
 
 def read_file(filename):
@@ -47,7 +54,7 @@ def read_file(filename):
 
 setup(
     name=PACKAGE_NAME,
-    version=project_version,
+    version=version,
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
     license='MIT',
@@ -57,8 +64,7 @@ setup(
     packages=find_packages(),
     url=URL,
     project_urls=PROJECT_URLS,
-    package_data={VERSION_FOLDER_NAME: ['VERSION']},
-    install_requires=open(REQUIREMENTS_FILE_PATH).read().split("\n") if REQUIREMENTS_FILE_PATH else [],
+    install_requires=requirements,
     keywords=KEYWORDS,
     entry_points={
       'console_scripts': [
