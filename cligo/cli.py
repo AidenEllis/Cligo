@@ -71,7 +71,7 @@ class CliApp:
             help_keywords = command_obj.Meta.help_keywords
 
             if args and args[0] in help_keywords and args[0] != '':
-                command_obj.help()
+                command_obj.help(command_name)
                 exit()
 
             # parameters of the func / method

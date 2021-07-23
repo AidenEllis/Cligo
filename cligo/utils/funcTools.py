@@ -1,7 +1,7 @@
 import inspect
 
 
-def get_func_args(func, remove_vals=None) -> list:
+def get_func_args(func, remove_vals=None) -> list[str]:
     """Get function arguments, varargs, kwargs and defaults.
 
     This function will be called whenever a exception is raised."""
@@ -74,3 +74,24 @@ def get_required_params(func, remove_values: list = None):
     params = removeValueFromList(values=remove_values, the_list=list(inspect.getargs(func.__code__)[0]))
 
     return params
+
+
+def getFuncParamInfo(func, param, fallback_type='', fallback_default_value='', convert_type_to_name=False):
+    info = {}
+    sig = inspect.signature(func).parameters.get(param)
+
+    info['name'] = sig.name
+    info['default_value'] = sig.default
+
+    if convert_type_to_name:
+        info['type'] = sig.annotation.__name__
+    else:
+        info['type'] = sig.annotation
+
+    if sig.default == inspect.Signature.empty:
+        info['default_value'] = fallback_default_value
+
+    if sig.annotation == inspect.Signature.empty:
+        info['type'] = fallback_type
+
+    return info
