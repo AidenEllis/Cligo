@@ -66,7 +66,7 @@ setup(
       ],
     },
     classifiers=[
-        "Development Status :: 1 - Planning",
+        "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
         'License :: OSI Approved :: MIT License',
