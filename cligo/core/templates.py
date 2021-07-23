@@ -9,7 +9,7 @@ Args:
 {{ ' ' * command|length }} {{ argInfo.name }} {{ ' ' * argInfo.longest_name_len }} : type ({{ argInfo.type }}) {{ ' ' * 
 argInfo.longest_type_len }} |  {{ argInfo.param_type }}  |  {{ 'default: ' if argInfo.default_value if 
 argInfo.default_value }}{{ ' ' * 9 if not argInfo.default_value }}{{ argInfo.default_value if argInfo.default_value
-}} {{ ' ' * argInfo.longest_default_value_len }} | {{ 'keyword: ' if argInfo.keyword }}{{ argInfo.keyword if 
+}} {{ ' ' * argInfo.longest_default_value_len }} |  {{ 'keyword: ' if argInfo.keyword }}{{ argInfo.keyword if 
 argInfo.keyword }}
 {% endfor -%}"""
 
