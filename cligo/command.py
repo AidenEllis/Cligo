@@ -1,5 +1,10 @@
-from cligo.utils.funcTools import get_func_args, get_required_params, removeValueFromList, getFuncParamInfo
+import colorama
+from cligo.output.outputHandler import outputData
 from cligo.core.templates import getCommandHelpTemplate
+from cligo.utils.funcTools import get_func_args, get_required_params, removeValueFromList, getFuncParamInfo
+
+
+colorama.init()
 
 
 class Command:
@@ -45,6 +50,13 @@ class Command:
 
         print(getCommandHelpTemplate(argsinfo=params_info, command_name=command_name))
 
+    @staticmethod
+    def output(text, string_format=False):
+        """Color supported output"""
+        
+        data = outputData(template=text, string_format=string_format)
+        print(data)
+
     def __call__(self, *args, **kwargs):
         pass
 
@@ -53,6 +65,6 @@ class Command:
         exit()
 
     class Meta:
-        param_keywords = None
+        param_keywords = {}
         kwarg_prefix = None
         help_keywords = []
