@@ -23,9 +23,6 @@ class CliApp:
 
     @staticmethod
     def config(database=None):
-        """
-        sets configuration for the class, as a dict.
-        """
         CliApp.configuration['database'] = database
         CliApp.configuration.get('database').connect()
 
@@ -67,16 +64,21 @@ class CliApp:
             command_dict = self.commands[command_name]
             command_obj = command_dict['command']()  # Inititlizing class with ()
 
-            # check for help command
+            # request object (access it with self.request)
+            request = {}
+
+            command_obj.request = request
+
             help_keywords = command_obj.Meta.help_keywords
 
-            if args and args[0] in help_keywords and args[0] != '':
+            if args and args[0] in help_keywords and args[0] != "":
                 command_obj.help(command_name)
                 exit()
-
             # parameters of the func / method
-            func_params = get_func_args(func=command_obj.process, remove_vals=['*args', '**kwargs'])[2:]
-            required_params = get_required_params(func=command_obj.process, remove_values=['self', 'request'])
+            func_params = get_func_args(func=command_obj.process, remove_vals=['*args', '**kwargs'])
+            func_params.remove('self')
+
+            required_params = get_required_params(func=command_obj.process, remove_values=['self'])
 
             params_filled = []
             required_param_didnt_fill = []
@@ -146,37 +148,33 @@ class CliApp:
                 raise RequiredArgumentNotProvidedError(command_obj=command_obj,
                                                        required_arg=required_param_didnt_fill[0])
 
-            # the 'request' param in command object (Working on it)
-            context = {}
-
             # Handle permissions if there are permissions for this command
             if command_dict['permissions']:
                 for permission in command_dict['permissions']:
                     # Loops through all the given permissions, continue the process if permission granted
                     # otherwise, run on_permission_denied()
                     permission = permission()
-                    has_permission = permission.process(request=context)
+                    permission.request = request
+                    has_permission = permission.process()
 
                     if not has_permission:
-                        permission.on_permission_denied(request=context)
+                        permission.on_permission_denied()
                         return
 
                     else:
                         pass
 
             try:
-                return command_obj.process(context, *args, **kwargs)
+                return command_obj.process(*args, **kwargs)
 
             except TypeError as e:
                 if not accepts_args(command_obj.process):
-                    raise GotUnexpectedValueError(command_name=command_name, value=args[-1], command_obj=command_obj)
+                    if (len(args) + len(kwargs)) > len(func_params):
+                        raise GotUnexpectedValueError(command_name=command_name, value=args[-1],
+                                                      command_obj=command_obj)
 
-                elif accepts_args(command_obj.process):
-                    raise GotMultipleValueError(command_name=command_name, command_obj=command_obj,
-                                                arg_name=e.args[0].split(" ")[-1].replace("'", ''))
-            except AttributeError as e:
-                print("Error: ", e, ', To make the command class work add def process(self, request): attribute'
-                                    'in your class.')
+                raise GotMultipleValueError(command_name=command_name, command_obj=command_obj,
+                                            arg_name=e.args[0].split(" ")[-1].replace("'", ''))
         else:
             raise CommandNotFoundError(command_name=command_name)
 

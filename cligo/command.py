@@ -8,6 +8,7 @@ class Command:
     """
 
     permissions = []
+    request = {}
 
     def OnRequiredArgumentNotProvidedError(self, arg, command_obj):
         """Handles OnRequiredArgumentNotProvidedError"""
