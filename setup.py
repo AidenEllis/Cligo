@@ -2,7 +2,6 @@ import os
 import re
 from setuptools import setup, find_packages
 
-
 PACKAGE_NAME = "Cligo"
 
 SHORT_DESCRIPTION = "A Python CLI Framework."
@@ -17,11 +16,10 @@ PROJECT_URLS = {
     'Issue tracker': 'https://github.com/AidenEllis/Cligo/issues'
 }
 
-requirements = []
 REQUIREMENTS_FILE_PATH = "requirements.txt"
 
 with open('requirements.txt') as f:
-  requirements = f.read().splitlines()
+    requirements = f.read().splitlines()
 
 KEYWORDS = [
     "cligo",
@@ -34,8 +32,6 @@ KEYWORDS = [
 
 AUTHOR = "Aiden Ellis"
 AUTHOR_EMAIL = "itsaidenellis@protonmail.com"
-
-version = ''
 
 try:
     with open('../cligo/__init__.py') as f:
@@ -67,9 +63,9 @@ setup(
     install_requires=requirements,
     keywords=KEYWORDS,
     entry_points={
-      'console_scripts': [
-          "cligo = cligo.core.management:execute_from_command_line",
-      ],
+        'console_scripts': [
+            "cligo = cligo.core.management:execute_from_command_line",
+        ],
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
