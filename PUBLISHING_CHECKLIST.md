@@ -4,3 +4,4 @@
 * Change the version in cligo `__version__`
 * Update setup.py if needed
 * Check requirements
+* Don't rush, take time
