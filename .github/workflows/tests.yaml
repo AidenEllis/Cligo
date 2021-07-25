@@ -1,8 +1,6 @@
-name: Testing Automation
+name: Automated testing
 
-on:
-  release:
-    types: [created]
+on: push
 
 jobs:
   deploy:
@@ -14,11 +12,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine
-    - name: Build and publish
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        pip install -r requirements.txt
+    - name: Running tests
       run: |
-        python setup.py sdist bdist_wheel
-        twine upload dist/*
+        python -m unittest discover tests
