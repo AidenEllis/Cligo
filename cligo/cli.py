@@ -1,6 +1,5 @@
 import sys
 import typing
-from cligo import process
 from cligo.exceptions import *
 from .utils.funcTools import *
 from cligo.command import Command
@@ -14,10 +13,12 @@ __all__ = ['CliApp']
 class CliApp:
 
     configuration = {}
+    commands = {}
+    database = DBManager(configuration.get('database'))
 
     def __init__(self, name: str):
         self.name = name
-        self.commands = process.commands
+        self.commands = CliApp.commands
         self.on_command_not_found_error = None
         self.db = DBManager(CliApp.configuration.get('database'))
 
@@ -25,6 +26,7 @@ class CliApp:
     def config(database=None):
         CliApp.configuration['database'] = database
         CliApp.configuration.get('database').connect()
+        CliApp.database = DBManager(CliApp.configuration.get('database'))
 
     @staticmethod
     def register(command_obj: typing.Type[Command], command_name: str):
@@ -43,7 +45,7 @@ class CliApp:
         if not issubclass(command_obj, Command):
             raise NotACommandSubClassError(command_obj.__name__)
 
-        process.commands[command_name] = {
+        CliApp.commands[command_name] = {
             'command': command_obj,
             'permissions': command_obj.permissions  # command_obj.permissions is a list
         }
@@ -144,7 +146,15 @@ class CliApp:
                     required_param_didnt_fill.append(arg)
                     filled_all_required_param = False
 
+            if not filled_all_required_param and not input_prams:
+                raise RequiredArgumentNotProvidedError(command_obj=command_obj,
+                                                       required_arg=required_param_didnt_fill[0])
+
             if not filled_all_required_param and args and not input_prams[0] in param_keywords.values():
+                raise RequiredArgumentNotProvidedError(command_obj=command_obj,
+                                                       required_arg=required_param_didnt_fill[0])
+
+            if not filled_all_required_param and not input_prams[0] in param_keywords.values():
                 raise RequiredArgumentNotProvidedError(command_obj=command_obj,
                                                        required_arg=required_param_didnt_fill[0])
 
@@ -178,13 +188,17 @@ class CliApp:
         else:
             raise CommandNotFoundError(command_name=command_name)
 
-    def run(self):
+    def run(self, params=None):
         """
         Takes user input and runs the command and handles Errors.
         """
 
         try:
-            prams = sys.argv[1:]  # removes the command name
+            if params:
+                prams = params
+            else:
+                prams = sys.argv[1:]  # removes the command name
+
             self.execute(prams)
 
         except RequiredArgumentNotProvidedError as e:
@@ -201,6 +215,13 @@ class CliApp:
 
         except GotMultipleValueError as e:
             e.command_obj.OnGotMultipleValueError(command_name=e.command_name, arg_name=e.arg_name)
+
+    def run_from_terminal(self, command: str):
+        """This is for test cases, alternative of run()"""
+        params = str(command).split(" ")
+        params.remove('python')
+        params.remove('main.py')
+        self.run(params=params)
 
     def set_on_command_not_found_error(self, obj: typing.Type[CliError]):
         self.on_command_not_found_error = obj()
