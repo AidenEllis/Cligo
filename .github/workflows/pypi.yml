@@ -17,6 +17,7 @@ jobs:
         pip install setuptools wheel twine
     - name: Running tests
       run: |
+        pip install -r requirements.txt
         python -m unittest discover tests
     - name: Build and publish
       env:
