@@ -51,11 +51,10 @@ class Command:
         print(getCommandHelpTemplate(argsinfo=params_info, command_name=command_name))
 
     @staticmethod
-    def output(text, string_format=False):
+    def output(text, *args, string_format=False, **kwargs):
         """Color supported output"""
-        
         data = outputData(template=text, string_format=string_format)
-        print(data)
+        print(data, *args, **kwargs)
 
     def __call__(self, *args, **kwargs):
         pass
