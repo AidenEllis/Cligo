@@ -1,5 +1,5 @@
-from .base import CliGoTestCase
-from .utils import commands, exceptions
+from tests.base import CliGoTestCase
+from tests.utils import commands, exceptions
 
 
 class CliGeneralTest(CliGoTestCase):

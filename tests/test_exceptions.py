@@ -1,6 +1,6 @@
 from cligo.exceptions import *
-from .base import CliGoTestCase
-from .utils import commands, errors
+from tests.base import CliGoTestCase
+from tests.utils import commands, errors
 
 
 class CliExceptionsTest(CliGoTestCase):
