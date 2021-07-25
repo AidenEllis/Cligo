@@ -144,7 +144,7 @@ class CliApp:
                     required_param_didnt_fill.append(arg)
                     filled_all_required_param = False
 
-            if not filled_all_required_param:
+            if not filled_all_required_param and args and not input_prams[0] in param_keywords.values():
                 raise RequiredArgumentNotProvidedError(command_obj=command_obj,
                                                        required_arg=required_param_didnt_fill[0])
 
