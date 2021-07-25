@@ -13,29 +13,24 @@ COLORS = dict(list(zip(['grey', 'red', 'green', 'yellow', 'blue', 'magenta', 'cy
 
 COLORS_RE = '\033\[(?:%s)m' % '|'.join(['%d' % v for v in COLORS.values()])
 
-HIGHLIGHTS = dict(
-    list(zip(['bg_grey', 'bg_red', 'bg_green', 'bg_yellow', 'bg_blue', 'bg_magenta', 'bg_cyan', 'bg_white'],
+BACKGROUNDS = dict(
+    list(zip(['grey', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'],
              list(range(40, 48)))))
 
-HIGHLIGHTS_RE = '\033\[(?:%s)m' % '|'.join(['%d' % v for v in HIGHLIGHTS.values()])
-
-ATTRIBUTES = dict(list(zip(['grey', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', ],
-                           list(range(30, 38)))))
-
-ATTRIBUTES_RE = '\033\[(?:%s)m' % '|'.join(['%d' % v for v in ATTRIBUTES.values()])
+BACKGROUNDS_RE = '\033\[(?:%s)m' % '|'.join(['%d' % v for v in BACKGROUNDS.values()])
 
 
 @pass_environment
-def colorFilter(environment=None, text=None, color=None, background_color=None, attributes=None):
+def colorFilter(environment=None, text=None, color=None, bg_color=None):
     """Jinja2 text color filer.
 
     environment is jinja2 parameter.
 
     Available colors:
-        red, green, yellow, blue, magenta, cyan, white
+        grey, red, green, yellow, blue, magenta, cyan, white
 
     Available backgrounds:
-        bg_grey, bg_red, bg_green, bg_yellow, bg_blue, bg_magenta, bg_cyan, bg_white
+        grey, red, green, yellow, blue, magenta, cyan, white
 
     Available attributes:
         bold, blink, dark, reverse, concealed, underline
@@ -48,15 +43,9 @@ def colorFilter(environment=None, text=None, color=None, background_color=None, 
             text = re.sub(COLORS_RE + '(.*?)' + RESET_RE, r'\1', text)
             text = fmt_str % (COLORS[color], text)
 
-        if background_color is not None:
-            text = re.sub(HIGHLIGHTS_RE + '(.*?)' + RESET_RE, r'\1', text)
-            text = fmt_str % (HIGHLIGHTS[background_color], text)
-
-        if attributes is not None:
-            text = re.sub(ATTRIBUTES_RE + '(.*?)' + RESET_RE, r'\1', text)
-
-            for attr in attributes:
-                text = fmt_str % (ATTRIBUTES[attr], text)
+        if bg_color is not None:
+            text = re.sub(BACKGROUNDS_RE + '(.*?)' + RESET_RE, r'\1', text)
+            text = fmt_str % (BACKGROUNDS[bg_color], text)
 
         return text + RESET
 
