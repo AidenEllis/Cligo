@@ -2,6 +2,9 @@ import os
 import re
 from setuptools import setup, find_packages
 
+
+BASE_DIR = os.path.dirname(__file__)
+
 PACKAGE_NAME = "Cligo"
 
 SHORT_DESCRIPTION = "A Python CLI Framework."
@@ -34,7 +37,7 @@ AUTHOR = "Aiden Ellis"
 AUTHOR_EMAIL = "itsaidenellis@protonmail.com"
 
 try:
-    with open('/cligo/__init__.py') as f:
+    with open(os.path.join(BASE_DIR, 'cligo', '__init__.py')) as f:
         version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
 except AttributeError:
     raise RuntimeError("__version__ not found.")
