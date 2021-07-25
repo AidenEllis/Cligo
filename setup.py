@@ -34,7 +34,7 @@ AUTHOR = "Aiden Ellis"
 AUTHOR_EMAIL = "itsaidenellis@protonmail.com"
 
 try:
-    with open('../cligo/__init__.py') as f:
+    with open('/cligo/__init__.py') as f:
         version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
 except AttributeError:
     raise RuntimeError("__version__ not found.")
