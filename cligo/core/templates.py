@@ -20,14 +20,23 @@ argInfo.keyword }}
     longest_default_value_len = 0
 
     for a in argsinfo.values():
+        if a['default_value'] is True:
+            a['default_value'] = 'True'
+
+        elif a['default_value'] is False:
+            a['default_value'] = 'False'
+
+        elif a['default_value'] is None:
+            a['default_value'] = 'None'
+
         if len(a['name']) > longest_name_len:
             longest_name_len = len(a['name'])
 
         if len(a['type']) > longest_type_len:
             longest_type_len = len(a['type'])
 
-        if len(a['default_value']) > longest_default_value_len:
-            longest_default_value_len = len(a['default_value'])
+        if len(str(a['default_value'])) > longest_default_value_len:
+            longest_default_value_len = len(str(a['default_value']))
 
     for k, v in argsinfo.items():
         a_ = longest_name_len - len(v['name'])
@@ -35,8 +44,7 @@ argInfo.keyword }}
 
         b_ = longest_type_len - len(v['type'])
         argsinfo[k]['longest_type_len'] = b_
-
-        c_ = longest_default_value_len - len(v['default_value'])
+        c_ = longest_default_value_len - len(str(v['default_value']))
         argsinfo[k]['longest_default_value_len'] = c_
 
     context = {
