@@ -15,6 +15,8 @@ All changes happen through pull requests. Pull requests are the best way to prop
 We actively welcome your pull requests and invite you to submit pull requests directly [here](https://github.com/AidenEllis/Cligo/pulls), 
 and after review, these can be merged into the project.
 
+Join our discord [discord](https://discord.gg/aw35Kb7uE7) server to know more
+
 ## Programming Language 🎊
 > Python
 

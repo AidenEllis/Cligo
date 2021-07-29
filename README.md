@@ -9,7 +9,7 @@
 <h3 align="center">
   <a href="https://github.com/AidenEllis/Cligo/blob/main/CONTRIBUTING.md">Contribute</a>
   <span> · </span>
-  <a href="https://discord.gg/gbJ3sAeZkv">Community</a>
+  <a href="https://discord.gg/aw35Kb7uE7">Community</a>
   <span> · </span>
   <a href="https://github.com/AidenEllis/Cligo/tree/main/docs">Documentation</a>
 </h3>
@@ -37,7 +37,7 @@ features.
 CliGo is open to contributions.
 
 Please read [CONTRIBUTING.md](https://github.com/AidenEllis/Cligo/blob/main/CONTRIBUTING.md) for details on this project 
-or visit our [Discord server](https://discord.gg/gbJ3sAeZkv)
+or visit our [Discord server](https://discord.gg/aw35Kb7uE7)
 
 ## Code of Conduct
 
