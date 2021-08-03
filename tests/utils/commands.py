@@ -102,3 +102,19 @@ class TestCommandCheckDefVal(Command):
             'arg2': '-a2',
             'defau': '-d'
         }
+
+
+class TestCommandCheckOption(Command):
+
+    def process(self, arg1, arg2="ABCD", *args, **kwargs):
+        if self.request.options and self.request.options.opt1 and not self.request.options.someweirdoption:
+            if arg1 and arg2 and args and kwargs:
+                raise Working()
+
+    class Meta(Command.Meta):
+        kwarg_prefix = '-'
+        param_keywords = {
+            'arg1': '-a1',
+            'arg2': '-a2'
+        }
+        option_prefix = '--'
