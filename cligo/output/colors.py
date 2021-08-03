@@ -3,7 +3,7 @@ import re
 from jinja2.filters import pass_environment
 
 
-__all__ = ['colorFilter']
+__all__ = ['colorFilter', 'colorText']
 
 RESET_RE = '\033\[0m'
 RESET = '\033[0m'
@@ -22,10 +22,16 @@ BACKGROUNDS_RE = '\033\[(?:%s)m' % '|'.join(['%d' % v for v in BACKGROUNDS.value
 
 @pass_environment
 def colorFilter(environment=None, text=None, color=None, bg_color=None):
-    """Jinja2 text color filer.
+    """
+    Jinja2 text color filer.
+    environment: is jinja2 parameter.
+    """
 
-    environment is jinja2 parameter.
+    return colorText(text=text, color=color, bg_color=bg_color)
 
+
+def colorText(text=None, color=None, bg_color=None):
+    """
     Available colors:
         grey, red, green, yellow, blue, magenta, cyan, white
 
@@ -35,7 +41,6 @@ def colorFilter(environment=None, text=None, color=None, bg_color=None):
     Available attributes:
         bold, blink, dark, reverse, concealed, underline
     """
-
     if os.getenv('ANSI_COLORS_DISABLED') is None:
         fmt_str = '\033[%dm%s'
 
