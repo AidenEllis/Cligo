@@ -67,3 +67,4 @@ class Command:
         param_keywords = {}
         kwarg_prefix = None
         help_keywords = []
+        option_prefix = None
