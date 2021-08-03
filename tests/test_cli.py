@@ -68,3 +68,11 @@ class CliGeneralTest(CliGoTestCase):
 
         with self.assertRaises(exceptions.Working):
             self.app.run_from_terminal("python main.py test argval1 -a2 argval2 -d defvalue")
+
+    def test_check_option_feature(self):
+        the_command = commands.TestCommandCheckOption
+
+        self.app.register(the_command, command_name='test')
+
+        with self.assertRaises(exceptions.Working):
+            self.app.run_from_terminal("python main.py test argval1 brrr addArg1 addArg2 -addKwarg val123 --opt1")

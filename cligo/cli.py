@@ -2,16 +2,17 @@ import sys
 import typing
 from cligo.exceptions import *
 from .utils.funcTools import *
-from cligo.command import Command
-from cligo.core.error import CliError
 from .db.manager import DBManager
+from cligo.command import Command
+from .output.colors import colorText
+from cligo.core.error import CliError
+from .utils.dataTools import ObjectMapDict
 
 
 __all__ = ['CliApp']
 
 
 class CliApp:
-
     configuration = {}
     commands = {}
     database = DBManager(configuration.get('database'))
@@ -67,7 +68,7 @@ class CliApp:
             command_obj = command_dict['command']()  # Inititlizing class with ()
 
             # request object (access it with self.request)
-            request = {}
+            request = ObjectMapDict()
 
             command_obj.request = request
 
@@ -76,6 +77,30 @@ class CliApp:
             if args and args[0] in help_keywords and args[0] != "":
                 command_obj.help(command_name)
                 exit()
+
+            # Command.Meta prefixes (truthy or falsy)
+            option_prefix = command_obj.Meta.option_prefix
+            kwarg_prefix = command_obj.Meta.kwarg_prefix
+
+            if option_prefix and kwarg_prefix:
+                if option_prefix == kwarg_prefix:
+                    print(f"{colorText('Cligo Error: ', 'red')}: command's ({command_name}) "
+                          f"{colorText('option_prefix', 'blue')} and {colorText('kwarg_prefix', 'blue')} can not be "
+                          "same.")
+                    exit()
+
+            options_dict = ObjectMapDict()
+
+            # Handling options and removing them from 'input_prams' & 'args'
+            if option_prefix:
+                for param in list(input_prams):
+                    if str(param).startswith(option_prefix):
+                        options_dict[param[2:]] = True
+                        input_prams.remove(param)
+                        args.remove(param)
+
+            request['options'] = options_dict
+
             # parameters of the func / method
             func_params = get_func_args(func=command_obj.process, remove_vals=['*args', '**kwargs'])
             func_params.remove('self')
@@ -100,10 +125,8 @@ class CliApp:
                     args.remove(args[args.index(value) + 1])
                     args.remove(value)
 
-            prefix = command_obj.Meta.kwarg_prefix  # truthy or falsy
-
             # if prefix truthy, it will allow extra keyword-args and adds it to kwargs.
-            if prefix:
+            if kwarg_prefix:
                 # **kwargs must be in the class method if prefix (Command.Meta.kwarg_prefix) is truthy
                 # show error if **kwargs not in the func / method
                 if not accepts_kwargs(command_obj.process):
@@ -116,8 +139,8 @@ class CliApp:
                     # if the word (eg. -u) start with the prefix (eg. prefix = '-') then
                     # it will take it as a key, eg('-u')
 
-                    if str(arg).startswith(prefix):
-                        kwargs[arg[len(prefix):]] = args[args.index(arg) + 1]
+                    if str(arg).startswith(kwarg_prefix):
+                        kwargs[arg[len(kwarg_prefix):]] = args[args.index(arg) + 1]
                         args.remove(args[args.index(arg) + 1])
                         args.remove(arg)
 
