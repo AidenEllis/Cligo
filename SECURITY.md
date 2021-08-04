@@ -2,4 +2,4 @@
 
 ## Reporting a Vulnerability
 
-Contact us on https://discord.gg/gbJ3sAeZkv
+Contact us on https://discord.gg/aw35Kb7uE7
