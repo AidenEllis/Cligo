@@ -8,6 +8,7 @@ policies = {"forbid": StrictUndefined, "allow": Undefined}
 
 def render_template(template: str, context: dict, undefined="allow") -> str:
     template = Environment(
-        loader=BaseLoader(), undefined=policies[undefined]
+        loader=BaseLoader(), undefined=policies[undefined],
+        autoescape=True
     ).from_string(template)
     return template.render(context)
