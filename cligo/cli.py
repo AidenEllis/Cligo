@@ -2,7 +2,6 @@ import sys
 import typing
 from cligo.exceptions import *
 from .utils.funcTools import *
-from .db.manager import DBManager
 from cligo.command import Command
 from .output.colors import colorText
 from cligo.core.error import CliError
@@ -15,19 +14,11 @@ __all__ = ['CliApp']
 class CliApp:
     configuration = {}
     commands = {}
-    database = DBManager(configuration.get('database'))
 
     def __init__(self, name: str):
         self.name = name
         self.commands = CliApp.commands
         self.on_command_not_found_error = None
-        self.db = DBManager(CliApp.configuration.get('database'))
-
-    @staticmethod
-    def config(database=None):
-        CliApp.configuration['database'] = database
-        CliApp.configuration.get('database').connect()
-        CliApp.database = DBManager(CliApp.configuration.get('database'))
 
     @staticmethod
     def register(command_obj: typing.Type[Command], command_name: str):
