@@ -31,6 +31,8 @@ permissions` (e.g., checking if the user is logged in),
 With our continuous updates you will keep getting new components and
 features.
 
+🥨 Read the [Docs](https://github.com/AidenEllis/Cligo/tree/main/docs) to Quickly get started!
+
 
 ## Contributions
 
