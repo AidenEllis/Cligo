@@ -27,5 +27,5 @@ We use GitHub issues to track public bugs. Please ensure your description is
 clear and has sufficient instructions to be able to reproduce the issue. Report a bug by <a href="https://github.com/AidenEllis/Cligo/issues">opening a new issue</a>; it's that easy 🎊!
 
 ## License ©
-By contributing to DogeHouse, you agree that your contributions will be licensed
+By contributing to Cligo, you agree that your contributions will be licensed
 under the [LICENSE](LICENSE.md)
