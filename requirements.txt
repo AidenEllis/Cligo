@@ -1,5 +1,5 @@
 asgiref==3.4.1
-certifi==2021.5.30
+certifi==2022.12.7
 colorama==0.4.4
 cx-Freeze==6.7
 cx-Logging==3.0
